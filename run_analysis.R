@@ -2,18 +2,18 @@ library(data.table)
 library(dplyr)
 
 #Reading the training data
-trainX<-read.table("~/Coursera/Cleaning/train/X_train.txt")
-trainY<-read.table("~/Coursera/Cleaning/train/y_train.txt")
-subject_train<-read.table("~/Coursera/Cleaning/train/subject_train.txt")
+trainX<-read.table("./train/X_train.txt")
+trainY<-read.table("./train/y_train.txt")
+subject_train<-read.table("./train/subject_train.txt")
 
 #Reading the test data
-testX<-read.table("~/Coursera/Cleaning/test/X_test.txt")
-testY<-read.table("~/Coursera/Cleaning/test/y_test.txt")
-subject_test<-read.table("~/Coursera/Cleaning/test/subject_test.txt")
+testX<-read.table("./test/X_test.txt")
+testY<-read.table("./test/y_test.txt")
+subject_test<-read.table("./test/subject_test.txt")
 
 #Description of the data
-variable_names<-read.table("~/Coursera/Cleaning/features.txt")
-activity_labels<-read.table("~/Coursera/Cleaning/activity_labels.txt")
+variable_names<-read.table("./features.txt")
+activity_labels<-read.table("./activity_labels.txt")
 
 #1.) Merging of Training and Test Data
 totalX<-rbind(trainX,testX)
@@ -38,4 +38,4 @@ colnames(desiredX)<-desired_variables[,2]
 colnames(subject_total)<-"subject"
 final<-cbind(desiredX,activitylabels,subject_total)
 finalmean<-final %>% group_by(activitylabels,subject) %>% summarize_all(funs(mean))
-write.table(finalmean,file="~/Coursera/Cleaning/tidydata.txt",row.names = FALSE,col.names = TRUE)
+write.table(finalmean,file="./tidydata.txt",row.names = FALSE,col.names = TRUE)
